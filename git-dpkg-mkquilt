@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 test -n "$(which git-dpkg-mkquilt.awk)" \
   || export PATH=$PATH:${0%/*}

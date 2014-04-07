@@ -1,3 +1,4 @@
 #!/bin/sh
+set -e
 tagname=v$(dpkg-parsechangelog | awk '/^Version: /{print $2}' | sed "s/[~]/-/g")
 git tag -a -m "Packaging release $tagname" debian/${tagname} $@

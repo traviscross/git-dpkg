@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 if test $# -lt 1; then
   echo "usage: $0 <upstream>"
   exit 1
