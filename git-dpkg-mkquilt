@@ -1,0 +1,33 @@
+#!/bin/sh
+
+excluded_files () {
+  git ls-tree --name-only master \
+    | git check-attr --stdin export-ignore \
+    | grep ': set$' \
+    | sed 's/^\([^:]*\):.*/\1/'
+  echo ".gitignore"
+  echo ".gitattributes"
+  echo "debian"
+}
+
+gen_excludes () {
+  excluded_files \
+    | while read l; do
+      echo -n "\$4 == \"$l\"{m=1} "; done
+}
+
+clean_tree () {
+  awk '{m=0}'"$(gen_excludes)"'{if (!m) print $0}'
+}
+
+if test $# -lt 1; then
+  echo "usage: $0 <upstream> [<diff-opts>...]"
+  exit 1
+fi
+
+upstream="$1"; shift
+export_tree=$(git ls-tree $upstream | clean_tree | git mktree)
+head_tree=$(git ls-tree HEAD | clean_tree | git mktree)
+mkdir -p debian/patches
+git diff "$@" ${export_tree}..${head_tree} > debian/patches/git-patches.diff
+echo "git-patches.diff" > debian/patches/series

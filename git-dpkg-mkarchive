@@ -1,0 +1,10 @@
+#!/bin/sh
+if test $# -lt 1; then
+  echo "usage: $0 <upstream>"
+  exit 1
+fi
+upstream="$1"
+src="$(dpkg-parsechangelog | awk '/^Source:/{print $2}')"
+ver="$(dpkg-parsechangelog | awk '/^Version:/{print $2}' | sed 's/-.*$//')"
+git archive --worktree-attributes --prefix=${src}-${ver}/ $upstream \
+  | xz -c9v > ../${src}_${ver}.orig.tar.xz
