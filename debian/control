@@ -1,0 +1,13 @@
+Source: git-dpkg
+Section: utils
+Priority: optional
+Maintainer: Travis Cross <tc@traviscross.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+
+Package: git-dpkg
+Architecture: all
+Depends: ${misc:Depends}, gawk, git, dpkg-dev
+Description: Utilities for building Debian packages from git
+ This package provides utilities for conveniently building packages
+ from git repositories.

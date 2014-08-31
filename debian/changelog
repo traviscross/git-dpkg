@@ -1,0 +1,5 @@
+git-dpkg (0.2) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Travis Cross <tc@traviscross.com>  Sun, 31 Aug 2014 07:03:14 +0000
