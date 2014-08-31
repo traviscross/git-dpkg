@@ -1,8 +1,10 @@
 #!/bin/sh
 set -e
 
-test -n "$(which git-dpkg-mkquilt.awk)" \
-  || export PATH=$PATH:${0%/*}
+test ! -x /usr/share/git-dpkg/git-dpkg-mkquilt.awk \
+  || export PATH=/usr/share/git-dpkg:$PATH
+test ! -x "${0%/*}/git-dpkg-mkquilt.awk" \
+  || export PATH="$PATH:${0%/*}"
 
 mktree_filter () (
   printf ".gitignore\n.gitattributes\n\ndebian\n" \
