@@ -1,3 +1,9 @@
+git-dpkg (0.3) unstable; urgency=low
+
+  * Add dependency on bash.
+
+ -- Travis Cross <tc@traviscross.com>  Mon, 01 Sep 2014 00:22:42 +0000
+
 git-dpkg (0.2) unstable; urgency=low
 
   * Initial Release.
